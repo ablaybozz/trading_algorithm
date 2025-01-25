@@ -1,10 +1,9 @@
-import torch
-from torch import nn, optim
-from torch.utils.data import DataLoader, TensorDataset
+from torch import nn
 
 class Autoencoder(nn.Module):
     def __init__(self, input_dim, kernel):
         super(Autoencoder, self).__init__()
+        
         self.encoder = nn.Sequential(
             nn.Linear(input_dim, 12),
             kernel,
@@ -16,7 +15,9 @@ class Autoencoder(nn.Module):
             kernel,
             nn.Dropout(0.1),
             nn.Linear(3, 1),
+            kernel
         )
+        
         self.decoder = nn.Sequential(
             nn.Linear(1, 3),
             kernel,
